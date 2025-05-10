@@ -6,14 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Uploader</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="index.css" />
   </head>
 
   <body>
-    <form>
-      <input type="file" id="fileInput" accept="image/*" />
-      <button type="button" id="uploadButton">Upload</button>
-    </form>
+    <div class="container">
+      <form action="/api/images" method="post" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="image" accept="image/*" />
+        <button type="submit" id="uploadButton">Upload</button>
+      </form>
+
+      <div id="imageContainer">
+        <img src="" alt="uploaded image" />
+      </div>
+    </div>
   </body>
   <script src="script.js"></script>
 </html>
