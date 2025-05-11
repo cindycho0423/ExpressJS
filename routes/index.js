@@ -4,17 +4,13 @@ var multer = require('multer');
 var path = require('path');
 var fs = require('fs');
 
-// 업로드 디렉토리 확인 및 생성
+// 업로드 디렉토리 경로 설정
 var uploadDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-  console.log('uploads 디렉토리가 생성되었습니다.');
-}
 
 // Multer 설정
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, uploadDir); // 절대 경로 사용
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     // 타임스탬프 + 원본 파일 확장자로 파일명 설정

@@ -19,15 +19,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 업로드된 파일에 접근할 수 있는 경로 설정
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 // 업로드 폴더가 존재하는지 확인하고 없으면 생성
 var uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-  console.log('uploads 디렉토리가 생성되었습니다.');
+console.log('업로드 디렉토리 경로:', uploadDir);
+console.log('디렉토리 존재 여부:', fs.existsSync(uploadDir));
+
+try {
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+    console.log('uploads 디렉토리가 생성되었습니다.');
+  } else {
+    console.log('uploads 디렉토리가 이미 존재합니다.');
+  }
+} catch (error) {
+  console.error('디렉토리 생성 중 오류 발생:', error);
 }
+
+// 업로드된 파일에 접근할 수 있는 경로 설정
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', indexRouter);
 
