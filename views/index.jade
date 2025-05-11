@@ -1,20 +1,39 @@
 doctype html
-html(lang="en")
+html(lang="ko")
   head
     meta(charset="UTF-8")
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Image Uploader
+    title 이미지 업로더
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
 
   body
     .container
-      form(action="/", method="post", enctype="multipart/form-data")
-        input(type="file", id="fileInput", name="myFile", accept="image/*")
-        button(type="submit", id="uploadButton") Upload
-
-      #imageContainer
-        img(src="", alt="uploaded image")
-
-  script(src="/javascripts/script.js")
+      h1 
+        i.fas.fa-cloud-upload-alt
+        |  #{title}
+      
+      form#uploadForm(action="/", method="post", enctype="multipart/form-data")
+        .file-input-container
+          span.file-label 이미지를 선택하거나 여기에 드래그하세요
+          input#fileInput(type="file", name="myFile", accept="image/*")
+        
+        #imageContainer.preview-container
+          img#previewImage(src="", alt="선택한 이미지")
+        
+        button#uploadButton(type="submit", disabled) 업로드
+        
+      #resultMessage
+        .result-title 이미지 업로드 결과
+      
+      #loadingSpinner
+        .spinner
+      
+      #uploadResult
+        .preview-container
+          img#uploadedImage(src="", alt="업로드된 이미지")
+      
+      button#resetButton(style="display: none;") 새 이미지 업로드
+    
+    script(src="/javascripts/script.js") 
