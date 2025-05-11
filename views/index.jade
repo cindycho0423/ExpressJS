@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Image Uploader
+    link(rel="stylesheet", href="/stylesheets/style.css")
+
+  body
+    .container
+      form(action="/", method="post", enctype="multipart/form-data")
+        input(type="file", id="fileInput", name="myFile", accept="image/*")
+        button(type="submit", id="uploadButton") Upload
+
+      #imageContainer
+        img(src="", alt="uploaded image")
+
+  script(src="/javascripts/script.js")
